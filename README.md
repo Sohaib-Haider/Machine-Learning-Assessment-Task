@@ -5,14 +5,15 @@ A machine learning pipeline that classifies customer queries into 4 categories
 
 ## Project Structure
 
-├── models/
-│   ├── model.joblib      # Trained Logistic Regression model
-│   └── model.joblib      # Trained Logistic Regression model
-├── api.py                # FastAPI app serving the /predict endpoint
-├── eda.ipynb             # Exploratory data analysis
-├── README.md        
-├── requirements.txt      # Python dependencies
-├── train.py              # Preprocessing, training, evaluation
+## Project Structure
+
+- `eda.ipynb` — Notebook where I explored the data first
+- `train.py` — Cleans the data, trains the model, checks accuracy, saves everything
+- `api.py` — The API that loads the model and makes predictions
+- `requirements.txt` — List of packages needed to run this
+- `models/`
+  - `model.joblib` — The trained model
+  - `vectorizer.joblib` — The tool that turns text into numbers
 
 ## Setup Instructions
 
