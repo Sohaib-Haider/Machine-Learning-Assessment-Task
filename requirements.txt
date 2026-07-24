@@ -6,3 +6,5 @@ uvicorn
 matplotlib
 seaborn
 joblib
+fastapi
+

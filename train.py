@@ -79,6 +79,11 @@ print(classification_report(y_test, y_pred, target_names=class_names))
 
 
 # Save artifacts for the API to use
+import os
+
+os.makedirs("models", exist_ok=True)
+
+
 print("Saving model and vectorizer... \n")
 joblib.dump(model, "models/model.joblib")
 joblib.dump(vectorizer, "models/vectorizer.joblib")
