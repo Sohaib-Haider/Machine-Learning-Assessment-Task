@@ -17,8 +17,7 @@ A machine learning pipeline that classifies customer queries into 4 categories
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/Sohaib-Haider/Machine-Learning-Assessment-Task/
-cd <your-repo-folder>
+git clone https://github.com/Sohaib-Haider/Machine-Learning-Assessment-Task.git
 ```
 
 2. Install dependencies:
