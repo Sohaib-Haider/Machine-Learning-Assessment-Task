@@ -1,0 +1,7 @@
+datasets
+scikit-learn
+pandas
+fastapi
+uvicorn
+matplotlib
+seaborn
