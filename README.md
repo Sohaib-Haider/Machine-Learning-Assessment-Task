@@ -64,18 +64,14 @@ No missing values were found in the dataset during EDA, so no imputation
 was needed.
 
 ### Vectorization
-- Used **TF-IDF** (`TfidfVectorizer`) to convert text into numeric features
-- Capped at **20,000 max features** to keep training fast and memory-efficient
-- Stopwords (e.g. "the", "is", "and") removed here using `stop_words='english'`, rather than inside the preprocessing function
+- Used **TF-IDF** to turn text into numbers the model can understand
+- Limited it to **20,000 words max**, to keep things fast and light
+- Removed common filler words (like "the", "is", "and") using `stop_words='english'`
 
-**Why stopwords weren't removed in `preprocess_text()`:** This was a
-deliberate choice, not an oversight. Removing stopwords was left to
-`TfidfVectorizer(stop_words='english')` instead, so each part of the
-pipeline has one clear job — `preprocess_text()` only standardizes the raw
-text format (case, URLs, punctuation, spacing), while the vectorizer handles
-everything related to turning words into model-ready features, including
-which words to ignore. This also means the vectorizer's built-in, well-tested
-English stopword list is used, rather than maintaining a separate custom one.
+**Why I didn't remove filler words in my cleaning function:** `TfidfVectorizer`
+already has a built-in option (`stop_words='english'`) that removes filler
+words automatically. Since it does this for me, there was no need to write
+extra code to do the same thing again in `preprocess_text()`.
 
 ### Model
 - **Logistic Regression** was chosen over Naive Bayes and Random Forest
