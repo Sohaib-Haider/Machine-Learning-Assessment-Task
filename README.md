@@ -52,27 +52,41 @@ articles and 7,600 test articles, evenly split across 4 balanced classes
 
 ## Methodology
 
-**Preprocessing:** Text was lowercased, stripped of URLs, stripped of
-punctuation, and had extra whitespace collapsed. This standardizes the text so
-the model isn't confused by superficial differences (e.g. "Oil" vs "oil") that
-don't affect meaning. No missing values were found in the dataset, so no
-imputation was needed.
+### Preprocessing
+- Converted all text to lowercase
+- Removed URLs (anything starting with `http` or `www`)
+- Stripped out all punctuation
+- Collapsed extra/multiple spaces into one
 
-**Vectorization:** TF-IDF (`TfidfVectorizer`) was used to convert text into
-numeric features, capped at 20,000 max features to keep training fast and
-memory-efficient. Stopword removal (`stop_words='english'`) was handled at
-this stage rather than in the custom preprocessing function, keeping each
-step's responsibility clear.
+This keeps the text in a consistent format so the model isn't confused by
+superficial differences (e.g. "Oil" vs "oil") that don't affect meaning.
+No missing values were found in the dataset during EDA, so no imputation
+was needed.
 
-**Model:** Logistic Regression was chosen over Naive Bayes and Random Forest.
-TF-IDF produces sparse, high-dimensional features, which Logistic Regression
-handles well; Random Forest is generally less suited to sparse text data.
-Logistic Regression is also fast to train and highly interpretable, making it
-a strong, standard baseline for text classification tasks like this.
+### Vectorization
+- Used **TF-IDF** (`TfidfVectorizer`) to convert text into numeric features
+- Capped at **20,000 max features** to keep training fast and memory-efficient
+- Stopwords (e.g. "the", "is", "and") removed here using `stop_words='english'`, rather than inside the preprocessing function
 
+**Why stopwords weren't removed in `preprocess_text()`:** This was a
+deliberate choice, not an oversight. Removing stopwords was left to
+`TfidfVectorizer(stop_words='english')` instead, so each part of the
+pipeline has one clear job — `preprocess_text()` only standardizes the raw
+text format (case, URLs, punctuation, spacing), while the vectorizer handles
+everything related to turning words into model-ready features, including
+which words to ignore. This also means the vectorizer's built-in, well-tested
+English stopword list is used, rather than maintaining a separate custom one.
+
+### Model
+- **Logistic Regression** was chosen over Naive Bayes and Random Forest
+- TF-IDF produces sparse, high-dimensional features, which Logistic Regression handles well
+- Random Forest is generally less suited to sparse text data
+- Logistic Regression is also fast to train and easy to interpret, making it a strong standard baseline for text classification
+
+### A note on typos
 Typos were not specifically handled, since AG News is professionally-written
-news text (Reuters/AP), making misspellings rare. The 20k max-feature cap also
-naturally filters out most rare/misspelled tokens.
+news text (Reuters/AP), making misspellings rare. The 20k max-feature cap
+also naturally filters out most rare/misspelled tokens.
 
 ## Evaluation
 
