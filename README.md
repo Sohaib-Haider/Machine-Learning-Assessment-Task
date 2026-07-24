@@ -5,8 +5,6 @@ A machine learning pipeline that classifies customer queries into 4 categories
 
 ## Project Structure
 
-## Project Structure
-
 - `eda.ipynb` — Notebook where I explored the data first
 - `train.py` — Cleans the data, trains the model, checks accuracy, saves everything
 - `api.py` — The API that loads the model and makes predictions
