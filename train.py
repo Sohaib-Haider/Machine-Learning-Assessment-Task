@@ -58,6 +58,7 @@ vectorizer = TfidfVectorizer(stop_words='english', max_features=20000)
 X_train_vec = vectorizer.fit_transform(X_train)
 X_test_vec = vectorizer.transform(X_test)  
 
+
 # Model training
 print("Training model... \n")
 
@@ -65,3 +66,13 @@ model = LogisticRegression(max_iter=1000, n_jobs=-1)
 
 model.fit(X_train_vec, y_train)
 
+
+# Evaluation
+print("Evaluating model... \n")
+y_pred = model.predict(X_test_vec)
+
+acc = accuracy_score(y_test, y_pred)
+print(f"Accuracy: {acc:.4f}\n")
+
+class_names = dataset["train"].features["label"].names
+print(classification_report(y_test, y_pred, target_names=class_names))
