@@ -76,3 +76,10 @@ print(f"Accuracy: {acc:.4f}\n")
 
 class_names = dataset["train"].features["label"].names
 print(classification_report(y_test, y_pred, target_names=class_names))
+
+
+# Save artifacts for the API to use
+print("Saving model and vectorizer... \n")
+joblib.dump(model, "models/model.joblib")
+joblib.dump(vectorizer, "models/vectorizer.joblib")
+print("Done. model.joblib and vectorizer.joblib saved.\n")
